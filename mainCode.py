@@ -38,25 +38,24 @@ def detectar(origem):
                 # se o conteúdo dentro do array entregue a maioria tiver dados acima de 0, então a face foi encontrada
                 if item.any() > 0:
                     cont += 1
+                    #print('Cont {}'.format(cont))
                 # se o conteúdo dentro do array entregue a maioria tiver dados abaixo de 0, então a face não foi encontrada
                 else:
-                    try:
-                        cont = 0
+                    cont = 0
 
-                    except ValueError:
-                         print("Oops! Erro ao análisar essa imagem.")
-
-                # se o valor de cont for maior que 0, então a face foi encontrada e irá salvar a imagem no diretório de destino
-                if cont >= 1:
-                    plt.imshow(FaceEncontrada)
-                    detected_face = FaceEncontrada * 255
-                    # pega o nome do arquivo em .gif e retira a extensão exemplo teste.gif para teste sem a extensão .gif
-                    nomeArquivo = os.path.splitext(arquivo)[0]
-                    cv2.imwrite(f"Faces Detectadas/{nomeArquivo}.jpg", detected_face[:, :, ::-1])
-                    acertou += 1
-                # se não, então a face não foi encontrada e irá contar quantidade de imagens erradas
-                else:
-                    errou += 1
+            # se o valor de cont for maior que 0, então a face foi encontrada e irá salvar a imagem no diretório de destino
+            if cont >= 1:
+                plt.imshow(FaceEncontrada)
+                detected_face = FaceEncontrada * 255
+                # pega o nome do arquivo em .gif e retira a extensão exemplo teste.gif para teste sem a extensão .gif
+                nomeArquivo = os.path.splitext(arquivo)[0]
+                cv2.imwrite(f"Faces Detectadas/{nomeArquivo}.jpg", detected_face[:, :, ::-1])
+                acertou += 1
+                print('Acertou {} '.format(acertou))
+            # se não, então a face não foi encontrada e irá contar quantidade de imagens erradas
+            else:
+                errou += 1
+                print('Errou {} '.format(errou))
 
     # tempo final da função
     tempoFinal = time.time()
